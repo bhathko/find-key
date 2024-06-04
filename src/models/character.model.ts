@@ -1,15 +1,17 @@
-export class CharacterModel {
-  public x: number;
-  public y: number;
-  public speed: number;
+import { GAME_CONFIG } from '../const/config.const'
 
-  constructor() {
-    this.x = 100;
-    this.y = 100;
-    this.speed = 5;
+export class CharacterModel {
+  public x: number
+  public y: number
+  public speed: number
+
+  constructor(x?: number, y?: number) {
+    this.x = x || 0
+    this.y = y || 0
+    this.speed = GAME_CONFIG.playerSpeed
   }
 }
 
-const characterModel = new CharacterModel();
+const characterModel = new CharacterModel()
 
-export default characterModel;
+export default characterModel

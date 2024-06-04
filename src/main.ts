@@ -1,13 +1,12 @@
-import { Game } from './game';
-import './style.css';
-import { Application } from 'pixi.js';
+import { Game } from './game'
+import './assets/styles/global.css'
+import { Application } from 'pixi.js'
 
 const app = new Application({
-  resizeTo: window,
-});
+  width: 501,
+  height: 501,
+})
 
-document.body.appendChild(app.view as HTMLCanvasElement);
+document.querySelector('#canvas')?.appendChild(app.view as HTMLCanvasElement)
 
-new Game(app).start();
-
-
+new Game(app).init()
