@@ -21,6 +21,8 @@ export class Game {
 
   private timer: NodeJS.Timeout | null = null;
   private costSeconds = 0;
+  private timerText!: Text;
+
   private gameStatus = GAME_STATE.MENU;
 
   private menuText!: Text;
@@ -128,18 +130,19 @@ export class Game {
   }
 
   onTimer(): void {
-    const timerText = new Text('00:00', { 
+    this.timerText = new Text('00:00', { 
       fontFamily: 'Arial',
       fontSize: 36,
       fill: 0x000, 
       align: 'center'
     })
-    timerText.x = this.app.screen.width - 95;
-    timerText.y = 6;
-    this.app.stage.addChild(timerText);
+    this.costSeconds = 0;
+    this.timerText.x = this.app.screen.width - 95;
+    this.timerText.y = 6;
+    this.app.stage.addChild(this.timerText);
     this.timer = setInterval(() => {
       this.costSeconds += 1;
-      timerText.text = this.timerTextFormat(this.costSeconds);
+      this.timerText.text = this.timerTextFormat(this.costSeconds);
     }, 1000);
   }
 
@@ -174,6 +177,7 @@ export class Game {
       this.gameStatus = GAME_STATE.PLAYING;
       this.app.stage.removeChild(this.menuText);
       this.app.stage.removeChild(this.menuBackground);
+      this.app.stage.removeChild(this.timerText);
       this.start();
     }
   }
